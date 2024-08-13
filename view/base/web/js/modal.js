@@ -85,7 +85,7 @@ define([], function(_) {
 
     var allowedConfigs = {
         slide: ['left', 'right', 'top', 'bottom'],
-        popup: ['top', 'center', 'bottom'],
+        popup: ['top', 'center', 'bottom', 'full'],
         fixed: ['center']
     };
 
