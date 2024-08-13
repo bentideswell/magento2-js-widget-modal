@@ -1,0 +1,233 @@
+//
+//
+//
+@_modal-sizes-small:  384px;
+@_modal-sizes-medium: 600px;
+@_modal-sizes-large:  900px;
+
+@modals-overlay__background-color: #000;
+@modals-overlay__transition: opacity 300ms ease-in-out 0;
+@modals-overlay-active__opacity: .4;
+
+@modal__background-color: #fff;
+@modal__padding: 32px 0 32px 32px;
+
+@modal-inner__max-height: 800px;
+@modal-inner__padding-right: 32px;
+
+@modal-slide-timing-function: ease-in-out;
+@modal-slide-duration: 300ms;
+@modal-slide-delay: false;
+
+@modal-slide-vertical__height: false;
+@modal-slide-vertical__max-height: 300px;
+@modal-slide-side__max-width: @_modal-sizes-small;
+@modal-slide-side__width: false;
+
+@modal-popup__max-width: @_modal-sizes-small;
+@modal-popup__min-width: 384px;
+
+
+@modal-popup__transition-timing-function: ease-in-out;
+@modal-popup__transition-duration: 200ms;
+@modal-popup__transition-delay: false;
+
+@modal-popup-top__top: 5%;
+@modal-popup-bottom__bottom: 5%;
+@modal-popup-center__top: 40%;
+
+@modal-popup-inner__max-height: 85vh;
+@modal-popup-center-inner__max-height: 60vh;
+
+@modal-popup-small__max-width:  @_modal-sizes-small;
+@modal-popup-medium__max-width: @_modal-sizes-medium;
+@modal-popup-large__max-width:  @_modal-sizes-large;
+
+& when (@media-common = true) {
+    //
+    //
+    //
+    aside.modals {
+        /* This fixes an issue where we see the modal slide off screen.
+         * This works because the display: none is inline so hides the modal.
+         * When the CSS loads, it then displays the modal, but it is offscreen
+         * by then
+         */
+        display: none; /* @critical */
+        display: block !important;
+        position: relative;
+        z-index: 9999;
+
+        & .overlay {
+            .lib-css(background-color, @modals-overlay__background-color);
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            .lib-css(transition, @modals-overlay__transition);
+            width: 100%;
+        }
+    }
+
+    body.-modals {
+        aside.modals {
+            & .overlay {
+                .lib-css(opacity, @modals-overlay-active__opacity);
+                pointer-events: auto;
+            }
+        }
+    }
+
+    .-modal {
+        .lib-css(background-color, @modal__background-color); 
+        overflow: hidden;
+        .lib-css(padding, @modal__padding);                   
+        
+        width: 100%;
+
+        & > .inner {
+
+            .lib-css(max-height, @modal-inner__max-height);
+            overflow-x: hidden;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+
+            .lib-css(padding-right, @modal-inner__padding-right);
+        }
+
+        &.-slide {
+            position: fixed;
+            transition-property: transform;
+            .lib-css(transition-timing-function, @modal-slide-timing-function);
+            .lib-css(transition-duration,        @modal-slide-duration);
+            .lib-css(transition-delay,           @modal-slide-delay);
+
+            width: 100%;
+
+            & > .inner {
+                max-height: 100%;
+            }
+
+            &.-top,
+            &.-bottom {
+                &.-active {
+                    transform: translateY(0);
+                }
+            }
+
+            &.-top {
+                .lib-css(height, @modal-slide-vertical__height);          
+                .lib-css(max-height, @modal-slide-vertical__max-height);
+                top: 0;
+                transform: translateY(-100%);
+            }
+
+            &.-bottom {
+                .lib-css(height, @modal-slide-vertical__height);          
+                .lib-css(max-height, @modal-slide-vertical__max-height);
+                bottom: 0;
+                transform: translateY(100%);
+            }
+
+            &.-left, 
+            &.-right {
+                height: 100%;
+                .lib-css(max-width, @modal-slide-side__max-width);  
+                top: 0;
+                .lib-css(width, @modal-slide-side__width);          
+
+                &.-active {
+                    transform: translateX(0);
+                }
+            }
+
+            &.-left {
+                left: 0;
+                transform: translateX(-100%);
+            }
+
+            &.-right {
+                right: 0;
+                transform: translateX(100%);
+            }
+        }
+
+        &.-popup {
+            left: 50%;
+            .lib-css(max-width, @modal-popup__max-width);
+            .lib-css(min-width, @modal-popup__min-width);
+            opacity: 0;
+            pointer-events: none;
+            position: fixed;
+            transform: translateX(-50%);
+
+            
+            & > .inner {
+                .lib-css(max-height, @modal-popup-inner__max-height);  
+            }
+
+            &.-active {
+                opacity: 1;
+                pointer-events: auto;
+
+                transition-property: opacity;
+                .lib-css(transition-timing-function, @modal-popup__transition-timing-function);
+                .lib-css(transition-duration,        @modal-popup__transition-duration);
+                .lib-css(transition-delay,           @modal-popup__transition-delay);
+            }
+
+            &.-bottom {
+                .lib-css(bottom, @modal-popup-bottom__bottom);
+            }
+
+            &.-top {
+                .lib-css(top, @modal-popup-top__top);
+            }
+
+            &.-center {
+                transform: translate(-50%, -50%);
+                .lib-css(top, @modal-popup-center__top);
+
+                & > .inner {
+                    .lib-css(max-height, @modal-popup-center-inner__max-height);
+                }
+            }
+
+            &.-small {
+                .lib-css(max-width, @modal-popup-small__max-width);      
+            }
+
+            &.-medium {
+                .lib-css(max-width, @modal-popup-medium__max-width);      
+            }
+
+            &.-large {
+
+                .lib-css(max-width, @modal-popup-large__max-width);  
+            }
+        }
+
+        & .block.-fixed {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            
+            & .block-content {
+                flex: 1;
+                overflow-x: hidden;
+                overflow-y: scroll;
+                overscroll-behavior: contain;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .-modal {
+        & > .inner {
+            height: 100%;
+        }
+    }
+}

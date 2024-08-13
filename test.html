@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="robots" content="NOINDEX,NOFOLLOW"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Modal Test File</title>
+<link rel="stylesheet" type="text/css"  media="all" href="/static/frontend/FishPig/fw/en_GB/css/styles.css"/>
+</head>
+<body>
+    <div style="padding: 50px;text-align: center;">
+        <a href="#" data-method="slide" data-position="top">Slide + Top</a><br/>
+        <a href="#" data-method="slide" data-position="left">Slide + Left</a><br/>
+        <a href="#" data-method="slide" data-position="right">Slide + Right</a><br/>
+        <a href="#" data-method="slide" data-position="bottom">Slide + Bottom</a><br/>
+        <a href="#" data-method="slide" data-position="center">Slide + Center</a><br/>
+        <br/>
+        <a href="#" data-method="popup" data-position="top">Popup + Top</a><br/>
+        <a href="#" data-method="popup" data-position="left">Popup + Left</a><br/>
+        <a href="#" data-method="popup" data-position="right">Popup + Right</a><br/>
+        <a href="#" data-method="popup" data-position="bottom">Popup + Bottom</a><br/>
+        <a href="#" data-method="popup" data-position="center">Popup + Center</a><br/>
+    </div>
+<script>
+var modal = false;
+function define(a, x) {
+    modal = x();
+}
+
+var script = document.createElement('script');
+script.onload = function() {
+    [].forEach.call(
+        document.querySelectorAll('a'),
+        function(a, index) {
+            var dataWrapper = document.createElement('div');
+
+            var method = a.getAttribute('data-method');
+            var position = a.getAttribute('data-position');
+
+            dataWrapper.innerHTML = '<h2>' + method + '  - ' + position + '</h2><p>This is a test!</p>';
+            dataWrapper.innerHTML += '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>';
+            dataWrapper.innerHTML += '<p><button type="button" class="action primary" data-modal-action="close">Close</button></p>';
+            
+            a.modal = modal({
+                id: method + '-' + position + '--' + index,
+                method: method,
+                position: position
+            }, dataWrapper);
+
+            if (!a.modal) {
+            a.remove();
+            } else {
+                a.onclick = function(e) {
+                    e.preventDefault();
+                    a.modal.open();
+                };
+            }
+        }
+    );
+};
+script.src = '/static/frontend/FishPig/fw/en_GB/FishPig_JsWidgetModal/js/modal.js';
+document.head.appendChild(script);
+</script>
+</body>
+</html>
