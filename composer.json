@@ -1,7 +1,7 @@
 {
     "name": "fishpig/magento2-js-widget-modal",
     "description": "Basic JS modal widget for Magento 2.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "autoload": {
         "files": [
             "registration.php"

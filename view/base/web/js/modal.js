@@ -130,6 +130,8 @@ define([], function(_) {
         wrapper.appendChild(inner);
         modalsInner.appendChild(wrapper);
 
+        element.style.display = null;
+        
         forEach(
             document.querySelectorAll('[' + triggerAttributeName + '="' + config.id + '"]'),
             function (trigger) {
