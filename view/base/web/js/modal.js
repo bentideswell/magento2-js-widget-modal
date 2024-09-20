@@ -119,7 +119,7 @@ define([], function(_) {
         var wrapper = document.createElement('div');
 
         wrapper.classList.add('-modal');
-        wrapper.classList.add(config.id);
+        wrapper.classList.add(config.id.replaceAll(' ', '_'));
         wrapper.classList.add('-' + config.method);
         wrapper.classList.add('-' + config.position);
         wrapper.classList.add('-' + config.size);

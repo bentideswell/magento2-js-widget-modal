@@ -39,9 +39,14 @@
 @modal-popup-inner__max-height: 85vh;
 @modal-popup-center-inner__max-height: 60vh;
 
-@modal-popup-small__max-width:  @_modal-sizes-small;
-@modal-popup-medium__max-width: @_modal-sizes-medium;
-@modal-popup-large__max-width:  @_modal-sizes-large;
+@modal-popup-small__max-width:  false;
+@modal-popup-small__width:      false;
+@modal-popup-medium__max-width: false;
+@modal-popup-medium__width:     false;
+@modal-popup-large__max-width:  false;
+@modal-popup-large__width:      false;
+
+@import '_modal-variables.less';
 
 & when (@media-common = true) {
     //
@@ -206,15 +211,18 @@
 
             &.-small {
                 .lib-css(max-width, @modal-popup-small__max-width);      
+                .lib-css(width, @modal-popup-small__width);      
             }
 
             &.-medium {
                 .lib-css(max-width, @modal-popup-medium__max-width);      
+                .lib-css(width, @modal-popup-medium__width);      
             }
 
             &.-large {
 
                 .lib-css(max-width, @modal-popup-large__max-width);  
+                .lib-css(width, @modal-popup-large__width);  
             }
         }
 
