@@ -112,17 +112,16 @@ define([], function(_) {
             return false;
         }
 
-        if (!config.size) {
-            config.size = 'small';
-        }
-
         var wrapper = document.createElement('div');
 
         wrapper.classList.add('-modal');
         wrapper.classList.add(config.id.replaceAll(' ', '_'));
         wrapper.classList.add('-' + config.method);
         wrapper.classList.add('-' + config.position);
-        wrapper.classList.add('-' + config.size);
+
+        if (config.size) {
+            wrapper.classList.add('-' + config.size);
+        }
 
         var inner = document.createElement('div');
         inner.classList.add('inner');
