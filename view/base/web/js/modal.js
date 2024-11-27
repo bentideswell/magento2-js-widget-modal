@@ -119,6 +119,10 @@ define([], function(_) {
         wrapper.classList.add('-' + config.method);
         wrapper.classList.add('-' + config.position);
 
+        if (config.wrapperClassList) {
+            wrapper.classList.add(...config.wrapperClassList);
+        }
+        
         if (config.size) {
             wrapper.classList.add('-' + config.size);
         }
