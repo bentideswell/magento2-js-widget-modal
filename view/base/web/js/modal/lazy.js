@@ -29,7 +29,7 @@ define([], function(_) {
                         document.body.appendChild(htmlWrapper);
                         fpjs.mageInit();
 
-                        require('FishPig_JsWidgetModal::js/modal', function(_modal) {
+                        require('FishPig_JsWidgetModal/js/modal', function(_modal) {
                             modal = _modal(config.modal, htmlWrapper);
                             setTimeout(function() {
                                 modal.open();
